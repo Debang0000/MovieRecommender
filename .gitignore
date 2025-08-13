@@ -16,8 +16,6 @@ Thumbs.db
 
 # Data: ignore only very large raw CSV; keep small CSVs tracked
 /data/TMDB_all_movies.csv
-# Notebooks (optional to ignore)
-/notebooks/
 
 # Python packaging
 build/

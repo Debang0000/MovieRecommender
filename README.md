@@ -61,6 +61,13 @@ MovieRecommender/
 
 Base URL: `http://127.0.0.1:5000`
 
+- GET `/healthz`
+  - Liveness/readiness probe. Returns `ok` (200) when the service is healthy.
+
+- GET `/debug/status`
+  - Diagnostics for the hybrid engine. Returns JSON with keys such as `has_svd`, `svd_qi_shape`, `svd_mapping_coverage`, `svd_df_overlap_coverage`, `embedding_shape`, etc.
+  - Useful for verifying that the collaborative (SVD) component is active and aligned with the dataset.
+
 - GET `/top-movies?page=<int>&page_size=<int>`
   - Returns a paginated list of globally top movies by WR.
   - Response: `{ "recommendations": [ { ...movie fields... } ], "page", "page_size", "total", "has_more" }`
@@ -69,6 +76,22 @@ Base URL: `http://127.0.0.1:5000`
   - Request body: `{ "titles": ["Inception", "Interstellar"] }`
   - Returns recommendations based on a hybrid of semantic similarity (BGE), optional SVD collaborative score, and WR quality re-ranking.
   - Response: `{ "recommendations": [ { ...movie fields... } ], "page", "page_size", "total", "has_more" }`
+
+  - Optional query params for tuning and diagnostics (defaults tuned for balanced hybrid):
+    - `alpha` (float, default 0.6): weight for semantic component
+    - `beta` (float, default 0.3): weight for SVD collaborative component (you may increase to 0.45–0.6 if coverage is healthy)
+    - `gamma` (float, default 0.1): weight for WR quality component
+    - `semantic_top_k` (int, default 200): size of semantic candidate pool
+    - `enable_mmr` (bool, default true): whether to apply MMR re-ranking for diversity
+    - `lambda_diversity` (float in [0,1], default 0.7): MMR tradeoff parameter
+    - `debug` (bool, default false): if true, includes a `debug` block with current hybrid status
+
+  - Example:
+    ```bash
+    curl -X POST "http://127.0.0.1:5000/recommend?page=1&page_size=10&alpha=0.45&beta=0.45&gamma=0.1&semantic_top_k=300&enable_mmr=true&lambda_diversity=0.7&debug=true" \
+      -H "Content-Type: application/json" \
+      -d '{"titles":["Inception","Interstellar"]}'
+    ```
 
 - GET `/search?q=<str>`
   - Autocomplete for titles (min length: 2 chars).

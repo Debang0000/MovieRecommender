@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let canLoadMore = true;
     const PAGE_SIZE = 10;
 
+	// --- DEFAULT TUNING FOR HYBRID WEIGHTS (increase collaborative weight) ---
+	const TUNING = {
+		alpha: 0.45,            // semantic
+		beta: 0.45,             // SVD collaborative
+		gamma: 0.10,            // WR quality
+		semantic_top_k: 300,
+		enable_mmr: true,
+		lambda_diversity: 0.7,
+		debug: false,
+	};
+
     // --- DOM ELEMENTS ---
     const searchInput = document.getElementById('searchInput');
     const selectedContainer = document.getElementById('selected-movies-container');
@@ -108,8 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
             options.method = 'GET';
             delete options.body;
             resultsHeading.textContent = "Top Rated Movies";
-        } else {
-            endpoint = `/recommend?page=${currentPage}&page_size=${PAGE_SIZE}`;
+		} else {
+			const q = new URLSearchParams({
+				page: String(currentPage),
+				page_size: String(PAGE_SIZE),
+				alpha: String(TUNING.alpha),
+				beta: String(TUNING.beta),
+				gamma: String(TUNING.gamma),
+				semantic_top_k: String(TUNING.semantic_top_k),
+				enable_mmr: String(TUNING.enable_mmr),
+				lambda_diversity: String(TUNING.lambda_diversity),
+				// debug: String(TUNING.debug), // enable if you want diagnostics in response
+			});
+			endpoint = `/recommend?${q.toString()}`;
             options.body = JSON.stringify(currentSearchPayload);
             resultsHeading.textContent = "Movies You Might Like";
         }
