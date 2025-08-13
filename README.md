@@ -2,6 +2,10 @@
 
 A lightweight Flask web app showcasing a hybrid movie recommendation engine. It combines semantic similarity (from precomputed text embeddings) with a quality re-ranking using a weighted rating (WR), and exposes a simple UI with autocomplete, multi-select input, and infinite scroll.
 
+## Live Demo
+
+- Deployed on Render: [movierecommender-v9dy.onrender.com](https://movierecommender-v9dy.onrender.com)
+
 ## Features
 
 - Hybrid recommendations: semantic similarity + quality-based re-ranking (WR)
