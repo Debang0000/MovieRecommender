@@ -14,6 +14,7 @@ Thumbs.db
 .vscode/
 .idea/
 
+
 # Data: ignore only very large raw CSV; keep small CSVs tracked
 /data/TMDB_all_movies.csv
 
