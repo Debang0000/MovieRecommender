@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.DS_Store
+.env
+.git
+.gitignore
+notebooks/
+data/
+# If you intend to bake artifacts into the image, you can remove the `data/` ignore
+# and rely on `movie_recommender/saved_models/` already present in repo.

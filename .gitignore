@@ -1,0 +1,32 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Data: ignore only very large raw CSV; keep small CSVs tracked
+/data/TMDB_all_movies.csv
+# Notebooks (optional to ignore)
+/notebooks/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Misc
+*.log
+._*
+
+# Do not ignore saved models; they are required at runtime
+# movie_recommender/saved_models/
