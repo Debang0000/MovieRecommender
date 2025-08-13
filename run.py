@@ -81,6 +81,19 @@ def search():
     matches = [title for title in all_movie_titles if query in title.lower()]
     return jsonify(matches[:10])
 
+# --- 2.1. HEALTH CHECK ENDPOINTS ---
+@app.route('/healthz', methods=['GET'])
+@app.route('/health', methods=['GET'])
+def healthz():
+    """Lightweight readiness/liveness probe."""
+    try:
+        test = get_top_movies(page=1, page_size=1)
+        if isinstance(test, dict) and 'error' in test:
+            return "not ready", 500
+        return "ok", 200
+    except Exception:
+        return "not ready", 500
+
 # --- 3. RUN THE APP ---
 if __name__ == '__main__':
     print("Starting Final Multi-Mode Movie Recommender Web App...")
