@@ -134,7 +134,6 @@ docker run --rm -p 5000:5000 \
   -v %cd%/movie_recommender/saved_models:/app/movie_recommender/saved_models:ro \
   movie-recommender
 ```
-(在 Linux/macOS 将 `%cd%` 替换为 `$(pwd)`)
 
 ## Developer Utilities
 
