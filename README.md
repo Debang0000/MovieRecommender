@@ -6,6 +6,10 @@ A lightweight Flask web app showcasing a hybrid movie recommendation engine. It 
 
 - Deployed on Render: [movierecommender-v9dy.onrender.com](https://movierecommender-v9dy.onrender.com)
 
+### Demo
+
+![Demo](assets/demo.gif)
+
 ## Features
 
 - Hybrid recommendations: semantic similarity + quality-based re-ranking (WR)
