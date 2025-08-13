@@ -141,10 +141,10 @@ $env:APP_HOST="0.0.0.0"; $env:APP_PORT="5000"; $env:APP_DEBUG="true"
   - Download: `https://grouplens.org/datasets/movielens/` (choose "ml-latest-small")
   - Expected files: `ratings.csv`, `movies.csv`, `links.csv`, `tags.csv`
 
-- TMDb metadata dump used for `TMDB_all_movies.csv`:
-  - Source: TMDb bulk export or preprocessed CSV from your own pipeline
-  - Path: `data/TMDB_all_movies.csv` (Note: this file can be large; repo `.gitignore` excludes it.)
-  - If you do not have this file, either remove the dependency in your preprocessing pipeline or regenerate via the notebook.
+- TMDb metadata (for `TMDB_all_movies.csv`):
+  - Source: Kaggle dataset [TMDB Movies Dataset 2023 (930k movies)](https://www.kaggle.com/datasets/asaniczka/tmdb-movies-dataset-2023-930k-movies)
+  - Path: `data/TMDB_all_movies.csv` (large file; excluded by `.gitignore`)
+  - Note: During EDA, a large number of extremely niche or low-quality entries were filtered out.
 
 ## Docker
 
